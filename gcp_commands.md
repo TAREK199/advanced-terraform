@@ -16,10 +16,10 @@ gcloud iam service-accounts create terraform-cloud \
     --description="SA for Terraform Cloud operations" \
     --display-name="terraform-cloud"
 
- gcloud projects add-iam-policy-binding [PROJECT_ID] \
-    --member="serviceAccount:terraform-cloud@[PROJECT_ID].iam.gserviceaccount.com" \
+ gcloud projects add-iam-policy-binding advancedterraform-415009 \
+    --member="serviceAccount:terraform-cloud@advancedterraform-415009.iam.gserviceaccount.com" \
     --role="roles/owner"
 
 gcloud iam service-accounts keys create tf_sa_key \
-    --iam-account=terraform-cloud@[PROJECT_ID].iam.gserviceaccount.com
+    --iam-account=terraform-cloud@advancedterraform-415009.iam.gserviceaccount.com
 ```
