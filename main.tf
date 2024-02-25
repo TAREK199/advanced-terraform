@@ -30,30 +30,6 @@ resource "google_compute_instance" "nginx_instance" {
   }
 }
 
-## Here is Our Redis
-
-
-
-# ## WEBSERVERS
-# resource "google_compute_instance" "web-instances" {
-#   count = 2
-#   name         = "web${count.index}"
-#   machine_type = var.environment_machine_type[var.target_environment]
-#   labels = {
-#     environment = var.environment_map[var.target_environment]
-#   }
-#      boot_disk {
-#     initialize_params {
-#       image = "debian-cloud/debian-11"
-#     }
-#   }
-
-#   network_interface {
-#     # A default network is created for all GCP projects
-#     network = data.google_compute_network.default.self_link
-#     subnetwork = google_compute_subnetwork.subnet-1.self_link
-#   }
-# }
 
 ## WEBSERVERS-MAP
 module "webservers" {
@@ -87,3 +63,13 @@ module "webservers" {
 #     subnetwork = google_compute_subnetwork.subnet-1.self_link
 #   }  
 # }
+
+## Here is Our Redis
+## REDIS
+resource "google_redis_instance" "redis" {
+  name = var.environment_instance_settings[var.target_environment].redis.name
+  tier = var.environment_instance_settings[var.target_environment].redis.tier
+  memory_size_gb = var.environment_instance_settings[var.target_environment].redis.memory_size_gb
+  location_id = var.zone
+  authorized_network = data.google_compute_network.default.id
+}
