@@ -30,6 +30,10 @@ resource "google_compute_instance" "nginx_instance" {
   }
 }
 
+## Here is Our Redis
+
+
+
 # ## WEBSERVERS
 # resource "google_compute_instance" "web-instances" {
 #   count = 2
